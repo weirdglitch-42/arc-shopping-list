@@ -1,6 +1,6 @@
 {
   "name": "arc-shopping-list",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "ARC Raiders Item Tracker - Desktop App",
   "main": "main.js",
   "scripts": {
