@@ -11,7 +11,7 @@ function createWindow() {
     height: 800,
     minWidth: 800,
     minHeight: 600,
-    icon: 'arc-raiders-icon-256.png',
+    icon: 'arc-raiders-icon-512.png',
     webPreferences: {
       nodeIntegration: false,
       contextIsolation: true,
