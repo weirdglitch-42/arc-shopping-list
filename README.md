@@ -95,26 +95,40 @@ npm run build
 
 ### Creating Releases
 
-The project uses GitHub Actions for automated cross-platform builds and releases.
+The project features a fully automated release system with intelligent versioning.
 
-#### Automated Release (Recommended)
-1. Update version in `package.json`
-2. Commit your changes
-3. Create and push a version tag:
-   ```bash
-   git add .
-   git commit -m "Release v1.0.1"
-   git tag v1.0.1
-   git push origin v1.0.1
-   ```
-4. GitHub Actions will automatically:
-   - Build for Windows, macOS, and Linux
-   - Create a GitHub release with all installers
-   - Generate release notes from commits
-
-#### Manual Release
+#### 🚀 One-Command Automated Release (Recommended)
 ```bash
-# Update version in package.json first
+npm run push-release
+```
+This automatically:
+- Analyzes your commit messages to determine version bump type
+- Updates version numbers in `package.json` and memory banks
+- Builds the application locally
+- Creates a local distribution package
+- Commits changes with proper versioning
+- Creates and pushes a git tag
+- Triggers GitHub Actions for cross-platform builds
+
+**Version bump logic:**
+- `patch` (1.0.0 → 1.0.1): Bug fixes and small changes
+- `minor` (1.0.0 → 1.1.0): New features (commits starting with "feat")
+- `major` (1.0.0 → 2.0.0): Breaking changes (commits with "breaking" or "!")
+
+#### Manual Version Control
+```bash
+# Bump specific version type
+npm run bump:patch    # 1.0.0 → 1.0.1
+npm run bump:minor    # 1.0.0 → 1.1.0
+npm run bump:major    # 1.0.0 → 2.0.0
+
+# Or use shorthand
+npm run bump          # defaults to patch
+```
+
+#### Legacy Manual Release
+```bash
+# For local testing only
 npm run release
 ```
 This creates a local zip file with the Windows installer and readme.
