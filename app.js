@@ -53,6 +53,9 @@ class ArcShoppingList {
         // Initialize theme system
         this.initializeTheme();
 
+        // Initialize update status system
+        this.initializeUpdateStatus();
+
         this.init();
     }
 
@@ -912,30 +915,37 @@ class ArcShoppingList {
         const iconUrl = wikiItem && wikiItem.icon ? wikiItem.icon : this.getMetaforgeIconUrl(itemName);
         const colors = this.getRarityColor(rarity || 'common'); // Ensure we always have a valid rarity
 
-        // Create the styled icon HTML similar to the Metaforge example
+        // Create wiki URL - replace spaces with underscores
+        const wikiUrl = `https://arcraiders.wiki/wiki/${itemName.replace(/\s+/g, '_')}`;
+
+        // Create the styled icon HTML similar to the Metaforge example, wrapped in a link
         return `
-            <div class="item-icon-container" style="
-                background: linear-gradient(to right top, ${colors.color} -80%, var(--background) 60%);
-                border: 1px solid ${colors.border};
-                position: relative;
-                display: inline-flex;
-                height: 64px;
-                width: 64px;
-                min-height: 64px;
-                min-width: 64px;
-                align-items: center;
-                justify-content: center;
-                overflow: hidden;
-                border-radius: 4px;
-            ">
-                <img src="${iconUrl}" alt="${itemName} icon" loading="lazy" style="
+            <a href="${wikiUrl}" target="_blank" rel="noopener noreferrer" class="item-icon-link" title="View ${itemName} on ARC Raiders Wiki">
+                <div class="item-icon-container" style="
+                    background: linear-gradient(to right top, ${colors.color} -80%, var(--background) 60%);
+                    border: 1px solid ${colors.border};
+                    position: relative;
+                    display: inline-flex;
                     height: 64px;
                     width: 64px;
                     min-height: 64px;
                     min-width: 64px;
-                    filter: drop-shadow(0px 0px 1px rgba(255, 255, 255, 0.1));
-                " onerror="this.style.display='none'">
-            </div>
+                    align-items: center;
+                    justify-content: center;
+                    overflow: hidden;
+                    border-radius: 4px;
+                    cursor: pointer;
+                    transition: transform 0.2s ease;
+                ">
+                    <img src="${iconUrl}" alt="${itemName} icon" loading="lazy" style="
+                        height: 64px;
+                        width: 64px;
+                        min-height: 64px;
+                        min-width: 64px;
+                        filter: drop-shadow(0px 0px 1px rgba(255, 255, 255, 0.1));
+                    " onerror="this.style.display='none'">
+                </div>
+            </a>
         `;
     }
 
@@ -1122,6 +1132,56 @@ class ArcShoppingList {
             themeToggle.addEventListener('click', () => {
                 this.toggleTheme();
             });
+        }
+    }
+
+    /**
+     * Initialize update status system
+     */
+    initializeUpdateStatus() {
+        // Set up update status button
+        const updateStatus = document.getElementById('update-status');
+        if (updateStatus) {
+            updateStatus.addEventListener('click', () => {
+                this.checkForUpdatesManually();
+            });
+        }
+    }
+
+    /**
+     * Show update available notification
+     */
+    showUpdateAvailable(version) {
+        const updateStatus = document.getElementById('update-status');
+        const updateText = updateStatus?.querySelector('.update-text');
+
+        if (updateStatus && updateText) {
+            updateText.textContent = `Update to v${version} available`;
+            updateStatus.style.display = 'flex';
+        }
+    }
+
+    /**
+     * Hide update notification
+     */
+    hideUpdateAvailable() {
+        const updateStatus = document.getElementById('update-status');
+        if (updateStatus) {
+            updateStatus.style.display = 'none';
+        }
+    }
+
+    /**
+     * Manually check for updates
+     */
+    checkForUpdatesManually() {
+        // This function will be called from the renderer process
+        // The actual update checking is handled in the main process
+        if (window.electronAPI && window.electronAPI.checkForUpdates) {
+            window.electronAPI.checkForUpdates();
+        } else {
+            // Fallback for when electronAPI is not available (development)
+            alert('Update checking is only available in the desktop application.');
         }
     }
 

@@ -148,6 +148,25 @@ For issues or questions:
 
 ## Updates
 
+### Automatic Updates
+The application includes automatic update checking and installation:
+
+- **Automatic Check**: Updates are checked automatically when the app starts
+- **Background Download**: New versions download in the background
+- **One-Click Install**: Restart the app to install updates when ready
+- **Manual Check**: Use Help → Check for Updates to manually check for updates
+
+### Update Notifications
+- **Header Notification**: Orange update button appears when updates are available
+- **Dialog Prompts**: Clear messages guide you through the update process
+- **Progress Tracking**: Download progress shown in console logs
+
+### Release Channels
+Updates are distributed through GitHub releases with:
+- **Stable Releases**: Fully tested versions with new features
+- **Bug Fixes**: Patch releases for critical issues
+- **Cross-Platform**: Updates work on Windows, macOS, and Linux
+
 The application includes all current game data. Check the releases page for updates when new content is added to ARC Raiders.
 
 ---
