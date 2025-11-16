@@ -58,14 +58,14 @@ jobs:
       uses: softprops/action-gh-release@v1
       with:
         files: |
-          artifacts/arc-shopping-list-windows-latest/dist/*.exe
-          artifacts/arc-shopping-list-windows-latest/dist/*.exe.blockmap
-          artifacts/arc-shopping-list-macos-latest/dist/*.dmg
-          artifacts/arc-shopping-list-ubuntu-latest/dist/*.AppImage
-          artifacts/arc-shopping-list-ubuntu-latest/dist/*.deb
-          artifacts/arc-shopping-list-ubuntu-latest/dist/*.rpm
-          artifacts/arc-shopping-list-ubuntu-latest/dist/*.snap
-          artifacts/arc-shopping-list-ubuntu-latest/dist/*.tar.gz
+          artifacts/arc-shopping-list-windows-latest/*.exe
+          artifacts/arc-shopping-list-windows-latest/*.exe.blockmap
+          artifacts/arc-shopping-list-macos-latest/*.dmg
+          artifacts/arc-shopping-list-ubuntu-latest/*.AppImage
+          artifacts/arc-shopping-list-ubuntu-latest/*.deb
+          artifacts/arc-shopping-list-ubuntu-latest/*.rpm
+          artifacts/arc-shopping-list-ubuntu-latest/*.snap
+          artifacts/arc-shopping-list-ubuntu-latest/*.tar.gz
         generate_release_notes: true
         draft: false
         prerelease: false
