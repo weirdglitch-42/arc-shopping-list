@@ -36,7 +36,7 @@ function bumpVersion(type = 'patch') {
     packageJson.version = newVersion;
     fs.writeFileSync('package.json', JSON.stringify(packageJson, null, 2) + '\n');
 
-    // Update progress.md if it exists
+    // Update progress.md if it exists (but don't add to git since memory-bank is ignored)
     const progressFile = 'memory-bank/progress.md';
     if (fs.existsSync(progressFile)) {
       let progressContent = fs.readFileSync(progressFile, 'utf8');
@@ -45,6 +45,7 @@ function bumpVersion(type = 'patch') {
         `Version: v${newVersion}`
       );
       fs.writeFileSync(progressFile, progressContent);
+      console.log(`✅ Updated version in ${progressFile}`);
     }
 
     console.log(`✅ Version bumped to ${newVersion}`);
@@ -60,8 +61,8 @@ function createRelease(newVersion) {
   try {
     console.log('📝 Creating release commit...');
 
-    // Stage changes
-    execSync('git add package.json memory-bank/progress.md', { stdio: 'inherit' });
+    // Stage changes (only package.json since memory-bank is ignored)
+    execSync('git add package.json', { stdio: 'inherit' });
 
     // Commit
     execSync(`git commit -m "chore: bump version to v${newVersion}"`, { stdio: 'inherit' });

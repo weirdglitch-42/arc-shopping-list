@@ -7,16 +7,31 @@ function analyzeCommits() {
   try {
     console.log('🔍 Analyzing recent commits for version bump...');
 
-    // Get commits since last tag
-    const lastTag = execSync('git describe --tags --abbrev=0 2>/dev/null || echo ""', { encoding: 'utf8' }).trim();
-    const range = lastTag ? `${lastTag}..HEAD` : 'HEAD';
+    // Get the last tag (cross-platform)
+    let lastTag = '';
+    try {
+      lastTag = execSync('git describe --tags --abbrev=0', { encoding: 'utf8' }).trim();
+    } catch (error) {
+      // No tags found, use empty string
+      lastTag = '';
+    }
 
-    const commits = execSync(`git log ${range} --oneline --pretty=format:"%s"`, { encoding: 'utf8' })
-      .split('\n')
-      .filter(commit => commit.trim());
+    // Get commits since last tag or all commits
+    let commits = [];
+    try {
+      const range = lastTag ? `${lastTag}..HEAD` : '--all';
+      const gitOutput = execSync(`git log ${range} --oneline --pretty=format:"%s"`, { encoding: 'utf8' });
+      commits = gitOutput.split('\n').filter(commit => commit.trim());
+    } catch (error) {
+      console.log('⚠️ Could not get commit history');
+      commits = [];
+    }
 
     console.log(`📝 Found ${commits.length} commits since ${lastTag || 'beginning'}:`);
-    commits.forEach(commit => console.log(`   ${commit}`));
+    commits.slice(0, 5).forEach(commit => console.log(`   ${commit}`));
+    if (commits.length > 5) {
+      console.log(`   ... and ${commits.length - 5} more`);
+    }
 
     // Analyze commit messages for version bump type
     let bumpType = 'patch'; // default
@@ -59,15 +74,16 @@ function runLocalBuild() {
 
     execSync('npm run build', { stdio: 'inherit' });
 
-    // Verify build
-    const exePath = 'dist/ARC Raiders Item Tracker Setup 1.0.0.exe';
+    // Verify build - get current version from package.json
+    const packageJson = JSON.parse(fs.readFileSync('package.json', 'utf8'));
+    const currentVersion = packageJson.version;
+    const exePath = `dist/ARC Raiders Item Tracker Setup ${currentVersion}.exe`;
     if (!fs.existsSync(exePath)) {
-      throw new Error('Build failed - executable not found');
+      throw new Error(`Build failed - ${exePath} not found`);
     }
 
     // Create local zip
-    const packageJson = JSON.parse(fs.readFileSync('package.json', 'utf8'));
-    const version = packageJson.version;
+    const version = currentVersion;
     const zipName = `arc-shopping-list-v${version}-windows.zip`;
 
     // Clean up old zips
