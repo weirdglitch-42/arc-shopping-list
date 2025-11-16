@@ -72,6 +72,60 @@ Each workshop station (Gear Bench, Utility Station, etc.) tracks progress indepe
 - **Icons not loading**: Ensure the `item-icons/` folder is present
 - **Performance issues**: Close other applications to free up memory
 
+## Development
+
+### Prerequisites
+- Node.js (v14 or higher)
+- npm
+
+### Local Development
+```bash
+# Install dependencies
+npm install
+
+# Run in development mode
+npm run dev
+
+# Run production build
+npm start
+
+# Build for distribution
+npm run build
+```
+
+### Creating Releases
+
+The project uses GitHub Actions for automated cross-platform builds and releases.
+
+#### Automated Release (Recommended)
+1. Update version in `package.json`
+2. Commit your changes
+3. Create and push a version tag:
+   ```bash
+   git add .
+   git commit -m "Release v1.0.1"
+   git tag v1.0.1
+   git push origin v1.0.1
+   ```
+4. GitHub Actions will automatically:
+   - Build for Windows, macOS, and Linux
+   - Create a GitHub release with all installers
+   - Generate release notes from commits
+
+#### Manual Release
+```bash
+# Update version in package.json first
+npm run release
+```
+This creates a local zip file with the Windows installer and readme.
+
+### Release Files
+Each release includes:
+- **Windows**: `ARC Raiders Item Tracker Setup X.X.X.exe` (installer)
+- **macOS**: `.dmg` disk image
+- **Linux**: `.AppImage`, `.deb`, `.rpm`, `.snap` packages
+- **README.md**: User documentation
+
 ## Support
 
 For issues or questions:
