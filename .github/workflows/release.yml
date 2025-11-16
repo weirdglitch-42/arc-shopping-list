@@ -4,15 +4,9 @@ on:
   push:
     tags:
       - 'v*'
-  workflow_dispatch:
-    inputs:
-      version:
-        description: 'Version to release (e.g., v1.0.0)'
-        required: true
-        type: string
 
 jobs:
-  release:
+  build:
     runs-on: ${{ matrix.os }}
 
     strategy:
@@ -33,27 +27,6 @@ jobs:
 
     - name: Build application
       run: npm run build
-      env:
-        GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-
-    - name: Create Release
-      if: matrix.os == 'windows-latest'
-      uses: softprops/action-gh-release@v1
-      with:
-        files: |
-          dist/ARC Raiders Item Tracker Setup *.exe
-          dist/ARC Raiders Item Tracker Setup *.exe.blockmap
-          dist/*.dmg
-          dist/*.AppImage
-          dist/*.deb
-          dist/*.rpm
-          dist/*.snap
-          dist/*.tar.gz
-        generate_release_notes: true
-        draft: false
-        prerelease: false
-      env:
-        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
     - name: Upload build artifacts
       uses: actions/upload-artifact@v4
@@ -65,3 +38,31 @@ jobs:
           !dist/*.yml
           !dist/builder-debug.yml
           !dist/builder-effective-config.yaml
+
+  release:
+    needs: build
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Download all artifacts
+      uses: actions/download-artifact@v4
+      with:
+        path: artifacts
+
+    - name: Create Release
+      uses: softprops/action-gh-release@v1
+      with:
+        files: |
+          artifacts/arc-shopping-list-windows-latest/dist/ARC Raiders Item Tracker Setup *.exe
+          artifacts/arc-shopping-list-windows-latest/dist/ARC Raiders Item Tracker Setup *.exe.blockmap
+          artifacts/arc-shopping-list-macos-latest/dist/*.dmg
+          artifacts/arc-shopping-list-ubuntu-latest/dist/*.AppImage
+          artifacts/arc-shopping-list-ubuntu-latest/dist/*.deb
+          artifacts/arc-shopping-list-ubuntu-latest/dist/*.rpm
+          artifacts/arc-shopping-list-ubuntu-latest/dist/*.snap
+          artifacts/arc-shopping-list-ubuntu-latest/dist/*.tar.gz
+        generate_release_notes: true
+        draft: false
+        prerelease: false
+      env:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}

@@ -21,6 +21,7 @@
   "build": {
     "appId": "com.arcraiders.itemtracker",
     "productName": "ARC Raiders Item Tracker",
+    "publish": null,
     "directories": {
       "output": "dist"
     },
