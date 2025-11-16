@@ -42,6 +42,8 @@ jobs:
   release:
     needs: build
     runs-on: ubuntu-latest
+    permissions:
+      contents: write
 
     steps:
     - name: Download all artifacts
@@ -49,12 +51,15 @@ jobs:
       with:
         path: artifacts
 
+    - name: List downloaded files
+      run: find artifacts -type f -name "*.exe" -o -name "*.dmg" -o -name "*.AppImage" -o -name "*.deb" -o -name "*.rpm" -o -name "*.snap" -o -name "*.tar.gz" | head -20
+
     - name: Create Release
       uses: softprops/action-gh-release@v1
       with:
         files: |
-          artifacts/arc-shopping-list-windows-latest/dist/ARC Raiders Item Tracker Setup *.exe
-          artifacts/arc-shopping-list-windows-latest/dist/ARC Raiders Item Tracker Setup *.exe.blockmap
+          artifacts/arc-shopping-list-windows-latest/dist/*.exe
+          artifacts/arc-shopping-list-windows-latest/dist/*.exe.blockmap
           artifacts/arc-shopping-list-macos-latest/dist/*.dmg
           artifacts/arc-shopping-list-ubuntu-latest/dist/*.AppImage
           artifacts/arc-shopping-list-ubuntu-latest/dist/*.deb
