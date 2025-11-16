@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ARC Raiders Item Tracker</title>
+
+    <!-- Desktop App Meta Tags -->
+    <meta name="description" content="Official ARC Raiders Item Tracker - Track game inventory items for expeditions, quests, scrappy runs, and workshop upgrades">
+
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <header>
+        <div class="header-content">
+            <div class="header-top">
+                <div></div> <!-- Spacer -->
+                <button id="theme-toggle" class="theme-toggle-btn" title="Toggle Dark Mode">
+                    <span class="theme-icon">🌙</span>
+                    <span class="theme-text">Dark Mode</span>
+                </button>
+            </div>
+            <svg xmlns="http://www.w3.org/2000/svg" width="280" height="32" fill="none" viewBox="0 0 284 32" class="logo-svg">
+                <path fill="currentColor" fill-rule="evenodd" d="M84.027 21.07h-4.914l4.926-9.329zM66.282 31.189h7.529l2.256-4.289h7.96v4.289h7.486V1.762h-9.69zm102.174-13.863c.84-1.32 1.48-3.08 1.48-5.361 0-3.241-1.12-6.162-3.599-8.083-1.64-1.28-4.52-2.12-9.159-2.12h-9.734l3.194 6.641h7.175c1.04 0 2.284.28 3.124.801 1 .64 1.76 1.88 1.76 3.44 0 1.641-.76 3.041-1.68 3.642-1 .64-2.64.8-4.559.8h-1.24l7.452 14.102h7.598l-5.651-10.7c1.4-.601 2.839-1.601 3.839-3.162m-36.794-9.505c4.057 0 6.284 2.943 7.12 5.13h7.874c-.795-4.613-5.727-11.732-14.954-11.732-9.625 0-15.432 7.715-15.432 15.232 0 7.954 6.284 15.294 15.512 15.294 7.119 0 13.164-4.597 14.874-11.557h-7.874c-.478 1.034-2.387 4.973-7.08 4.973-4.892 0-7.915-4.295-7.915-8.75 0-4.176 2.824-8.59 7.875-8.59m-17.692 9.416c.835-1.313 1.472-3.062 1.472-5.33 0-3.22-1.114-6.124-3.579-8.033-1.631-1.273-4.494-2.112-9.107-2.112h-9.634v29.427h7.526l-.002-22.786 2.786.013c1.034 0 2.227.23 3.062.747.994.637 1.75 1.87 1.75 3.42 0 1.631-.756 3.023-1.67 3.62-.995.636-2.625.795-4.534.795h-1.233l7.479 14.19h7.603l-5.736-10.81c1.392-.596 2.823-1.59 3.817-3.141m73.367 3.37c-.08 1-.36 1.96-.92 2.84-.84 1.361-2.279 2.482-4.639 2.482-4 0-5.52-3.521-5.52-5.562v-.04c0-2.52 1.68-5.722 5.48-5.722 2.8 0 4.319 1.56 5.039 3.081.44.92.64 1.92.56 2.92Zm.017-11.432v2.332c-.88-1.36-2.937-3.103-6.576-3.103-5.92 0-11.159 4.56-11.159 11.843 0 6.362 4.102 11.498 11.141 11.498 2.6 0 5.356-.548 6.556-2.709v2.153h6.661l-.003-22.014zm8.192 22.014h6.62V9.175h-6.62V31.19Zm0-22.804h6.62V1.762h-6.62zm24.309 15.823c-1.039 1.04-2.519 1.68-4.119 1.68-3.12 0-5.559-2.28-5.559-5.681v-.04c0-2.56 1.799-5.562 5.639-5.562 1.56 0 2.96.56 3.96 1.56.999.961 1.64 2.321 1.64 3.922.079 1.64-.521 3.08-1.561 4.121m1.177-22.446v9.256c-.72-.72-2.576-2.614-6.496-2.614-5.639 0-10.999 4.28-10.999 11.803 0 6.682 4.395 11.538 11.115 11.538 4.48 0 6.079-1.864 6.719-2.784v2.228h6.324V1.762zm14.803 15.764c.16-1.04 1.52-3.52 4.96-3.52s4.799 2.48 4.959 3.52zm4.919-9.122c-6.759 0-11.638 5.721-11.638 11.923 0 6.602 5.395 11.418 11.754 11.418 2.28 0 4.484-.335 6.324-1.655 1.88-1.28 3.44-3.201 4.52-5.682h-6.8c-.8 1.16-1.92 2.08-4.039 2.08-2.6 0-4.84-1.56-5.12-3.92h16.519c.519-4.082-.32-7.643-3.12-10.644-2.08-2.2-5-3.52-8.4-3.52m34.091 9.002c-1.759-.52-3.399-1.2-3.399-2.2 0-.6.48-1.48 1.879-1.48 1.961 0 2.056 1.213 2.096 1.693h6.508c-.56-5.841-5.604-7.015-8.523-7.015-3.276 0-6.246 1.482-7.685 3.997V8.404c-3.84 0-5 2.04-5.64 3.24l-.006-2.469h-6.244l.038 22.014h6.658l-.038-11.67c0-2.92 1.395-4.258 4.362-4.417a8 8 0 0 0-.045.824c0 3 2.4 4.881 5.28 5.801 4.239 1.64 5.879 1.84 5.879 3.361 0 1.08-1.199 1.72-2.32 1.72-.279 0-2.232-.02-2.512-2.06h-6.62c.6 5.842 5.686 6.997 9.045 6.997 4.92 0 9.047-2.495 9.047-7.377 0-4.801-4-5.921-7.76-6.962m7.657-7.75h-.189v-.418h.21c.137 0 .217.063.217.191 0 .164-.09.227-.238.227m.365.104c.151-.07.238-.188.238-.358 0-.268-.217-.418-.53-.418h-.627v1.482h.365v-.57h.155c.165 0 .241.076.255.236l.013.18a.6.6 0 0 0 .031.154h.355a.8.8 0 0 1-.038-.282c-.01-.264-.079-.368-.217-.424m-.354 1.047c-.562 0-1.033-.473-1.033-1.068 0-.616.475-1.068 1.043-1.068.558 0 1.019.467 1.019 1.085 0 .567-.458 1.05-1.029 1.05Zm-.021-2.403c-.695 0-1.298.605-1.298 1.314 0 .744.565 1.356 1.319 1.356.691 0 1.314-.563 1.314-1.335 0-.723-.568-1.335-1.335-1.335" clip-rule="evenodd"></path>
+                <mask id="logo-mask" width="62" height="32" x="0" y="0" maskUnits="userSpaceOnUse">
+                    <path fill="#fff" d="M.157.013h61.126V31.19H.157z"></path>
+                </mask>
+                <g mask="url(#logo-mask)">
+                    <path stroke="#D00000" stroke-width="1.254" d="M323.215 118.365H170.753a119.45 119.45 0 0 1-61.511-17.059 119.45 119.45 0 0 1-43.94-46.303L-65.962-191.869"></path>
+                    <path stroke="#C82451" stroke-width="1.254" d="M-59.873-195.106 71.391 51.766c19.58 36.826 57.654 59.703 99.362 59.703h152.461"></path>
+                    <path stroke="#FF5600" stroke-width="1.254" d="M324.312 162.25H167.658a94.36 94.36 0 0 1-83.308-50.057L-56.924-153.505"></path>
+                    <path stroke="#E6A34C" stroke-width="1.254" d="M-50.835-156.742 90.439 108.956c15.217 28.619 44.806 46.398 77.22 46.398h156.653"></path>
+                    <path stroke="#00A900" stroke-width="1.254" d="M-164.853 293.279h65.975c57.08 0 108.71-29.211 138.108-78.138s30.951-108.227 4.154-158.626L-100.61-214.296"></path>
+                    <path stroke="#57BB7C" stroke-width="1.254" d="M-94.52-217.534 49.473 53.278c7.253 13.641 12.603 28.016 15.902 42.726a164.7 164.7 0 0 1 3.84 43.07c-1.194 27.863-9.519 55.395-24.074 79.619s-34.956 44.5-58.998 58.635a164.7 164.7 0 0 1-39.83 16.829c-14.538 3.993-29.742 6.018-45.191 6.018h-65.975"></path>
+                    <path stroke="#75B8DD" stroke-width="1.254" d="M-175.248 204.882h43.035c13.863 0 27.507-1.818 40.553-5.401a147.8 147.8 0 0 0 35.745-15.103c21.575-12.685 39.882-30.88 52.943-52.618C10.09 110.023 17.56 85.316 18.632 60.312a147.8 147.8 0 0 0-3.447-38.652C12.225 8.46 7.424-4.44.915-16.68l-126.329-237.593"></path>
+                    <path stroke="#0093ED" stroke-width="1.254" d="M-131.503-251.036-5.173-13.443c23.93 45.006 22.543 97.96-3.71 141.652s-72.357 69.776-123.33 69.776h-43.035"></path>
+                    <path stroke="red" stroke-width="6.896" d="M323.214 114.917H170.752c-42.886 0-82.272-23.666-102.406-61.532L-62.918-193.487"></path>
+                    <path stroke="#FFEA00" stroke-width="6.896" d="M324.312 158.802H167.658c-33.614 0-64.484-18.549-80.264-48.228L-53.88-155.124"></path>
+                    <path stroke="#05FF74" stroke-width="6.896" d="M-97.565-215.915 46.428 54.897c58.283 109.613-21.161 241.83-145.306 241.83h-65.975"></path>
+                    <path stroke="#5FFFFF" stroke-width="6.896" d="M-128.459-252.654-2.129-15.062c52.177 98.13-18.944 216.496-130.084 216.496h-43.035"></path>
+                </g>
+            </svg>
+            <h2 class="header-subtitle">Item Tracker</h2>
+        </div>
+    </header>
+
+    <main>
+        <div id="projects-container">
+            <div class="tabs-container">
+            <div class="tabs-header">
+                <button class="tab-button active" data-tab="all">All Items</button>
+                <button class="tab-button" data-tab="expedition">Expedition Project</button>
+                <button class="tab-button" data-tab="quests">Quest Items</button>
+                <button class="tab-button" data-tab="scrappy">Scrappy Items</button>
+                <button class="tab-button" data-tab="workshop">Workshop Items</button>
+                <button class="tab-button" data-tab="wiki">Wiki Reference</button>
+            </div>
+            <div class="tabs-content">
+                <div id="all-tab" class="tab-content active">
+                    <div class="project-card">
+                        <div class="project-header">
+                            <h2 class="project-title">All Items Combined</h2>
+                            <div class="project-progress">
+                                <div class="progress-bar">
+                                    <div class="progress-fill" id="all-progress-fill"></div>
+                                </div>
+                                <span class="progress-text" id="all-progress-text">0/0 (0%)</span>
+                            </div>
+                        </div>
+                        <div class="project-content">
+                            <div id="all-items-container" class="grouped-items">
+                                <!-- All items will be inserted here -->
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div id="expedition-tab" class="tab-content">
+                    <div class="project-card">
+                        <div class="project-header">
+                            <h2 class="project-title">Expedition Project</h2>
+                            <div class="project-progress">
+                                <div class="progress-bar">
+                                    <div class="progress-fill" id="expedition-progress-fill"></div>
+                                </div>
+                                <span class="progress-text" id="expedition-progress-text">0/0 (0%)</span>
+                            </div>
+                        </div>
+                        <div class="project-content">
+                            <div id="expedition-container" class="grouped-items">
+                                <!-- Expedition items will be inserted here -->
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div id="quests-tab" class="tab-content">
+                    <div class="project-card">
+                        <div class="project-header">
+                            <h2 class="project-title">Quest Items</h2>
+                            <div class="project-progress">
+                                <div class="progress-bar">
+                                    <div class="progress-fill" id="quests-progress-fill"></div>
+                                </div>
+                                <span class="progress-text" id="quests-progress-text">0/0 (0%)</span>
+                            </div>
+                        </div>
+                        <div class="project-content">
+                            <div id="quests-container" class="grouped-items">
+                                <!-- Quest items will be inserted here -->
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div id="scrappy-tab" class="tab-content">
+                    <div class="project-card">
+                        <div class="project-header">
+                            <h2 class="project-title">Scrappy Items</h2>
+                            <div class="project-progress">
+                                <div class="progress-bar">
+                                    <div class="progress-fill" id="scrappy-progress-fill"></div>
+                                </div>
+                                <span class="progress-text" id="scrappy-progress-text">0/0 (0%)</span>
+                            </div>
+                        </div>
+                        <div class="project-content">
+                            <div id="scrappy-container" class="grouped-items">
+                                <!-- Scrappy items will be inserted here -->
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div id="workshop-tab" class="tab-content">
+                    <div class="project-card">
+                        <div class="project-header">
+                            <h2 class="project-title">Workshop Items</h2>
+                            <div class="project-progress">
+                                <div class="progress-bar">
+                                    <div class="progress-fill" id="workshop-progress-fill"></div>
+                                </div>
+                                <span class="progress-text" id="workshop-progress-text">0/0 (0%)</span>
+                            </div>
+                        </div>
+                        <div class="project-content">
+                            <div id="workshop-container" class="grouped-items">
+                                <!-- Workshop items will be inserted here -->
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div id="wiki-tab" class="tab-content">
+                    <div id="wiki-container"></div>
+                </div>
+            </div>
+            </div>
+        </div>
+    </main>
+
+    <footer>
+        <p>Items collected and progress saved automatically</p>
+    </footer>
+
+    <script src="app.js"></script>
+</body>
+</html>

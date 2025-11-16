@@ -1,0 +1,49 @@
+{
+  "name": "arc-shopping-list",
+  "version": "1.0.0",
+  "description": "ARC Raiders Item Tracker - Desktop App",
+  "main": "main.js",
+  "scripts": {
+    "start": "electron .",
+    "dev": "electron . --dev",
+    "build": "electron-builder",
+    "build:win": "electron-builder --win",
+    "build:mac": "electron-builder --mac",
+    "build:linux": "electron-builder --linux"
+  },
+  "author": "ARC Raiders Community",
+  "license": "MIT",
+  "devDependencies": {
+    "electron": "^28.0.0",
+    "electron-builder": "^24.0.0"
+  },
+  "build": {
+    "appId": "com.arcraiders.itemtracker",
+    "productName": "ARC Raiders Item Tracker",
+    "directories": {
+      "output": "dist"
+    },
+    "files": [
+      "**/*",
+      "!dist/**",
+      "!build/**",
+      "!node_modules/**",
+      "!*.md",
+      "!memory-bank/**",
+      "!services/**",
+      "!icons/**"
+    ],
+    "win": {
+      "target": "nsis",
+      "icon": false
+    },
+    "mac": {
+      "target": "dmg",
+      "icon": false
+    },
+    "linux": {
+      "target": "AppImage",
+      "icon": false
+    }
+  }
+}

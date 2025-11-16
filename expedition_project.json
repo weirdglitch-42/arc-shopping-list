@@ -1,0 +1,98 @@
+[
+  {
+    "name": "Advanced Electrical Components",
+    "quantity": "5",
+    "requirement": "Phase 4",
+    "id": "advanced-electrical-components-phase-4"
+  },
+  {
+    "name": "Arc Alloy",
+    "quantity": "80",
+    "requirement": "Phase 1",
+    "id": "arc-alloy-phase-1"
+  },
+  {
+    "name": "Battery",
+    "quantity": "30",
+    "requirement": "Phase 3",
+    "id": "battery-phase-3"
+  },
+  {
+    "name": "Cooling Fan",
+    "quantity": "5",
+    "requirement": "Phase 2",
+    "id": "cooling-fan-phase-2"
+  },
+  {
+    "name": "Durable Cloth",
+    "quantity": "35",
+    "requirement": "Phase 2",
+    "id": "durable-cloth-phase-2"
+  },
+  {
+    "name": "Electrical Components",
+    "quantity": "30",
+    "requirement": "Phase 2",
+    "id": "electrical-components-phase-2"
+  },
+  {
+    "name": "Exodus Modules",
+    "quantity": "1",
+    "requirement": "Phase 3",
+    "id": "exodus-modules-phase-3"
+  },
+  {
+    "name": "Humidifier",
+    "quantity": "5",
+    "requirement": "Phase 4",
+    "id": "humidifier-phase-4"
+  },
+  {
+    "name": "Leaper Pulse Unit",
+    "quantity": "3",
+    "requirement": "Phase 4",
+    "id": "leaper-pulse-unit-phase-4"
+  },
+  {
+    "name": "Light Bulb",
+    "quantity": "5",
+    "requirement": "Phase 3",
+    "id": "light-bulb-phase-3"
+  },
+  {
+    "name": "Magnetic Accelerator",
+    "quantity": "3",
+    "requirement": "Phase 4",
+    "id": "magnetic-accelerator-phase-4"
+  },
+  {
+    "name": "Metal Parts",
+    "quantity": "150",
+    "requirement": "Phase 1",
+    "id": "metal-parts-phase-1"
+  },
+  {
+    "name": "Rubber Parts",
+    "quantity": "200",
+    "requirement": "Phase 1",
+    "id": "rubber-parts-phase-1"
+  },
+  {
+    "name": "Sensors",
+    "quantity": "20",
+    "requirement": "Phase 3",
+    "id": "sensors-phase-3"
+  },
+  {
+    "name": "Steel Spring",
+    "quantity": "15",
+    "requirement": "Phase 1",
+    "id": "steel-spring-phase-1"
+  },
+  {
+    "name": "Wires",
+    "quantity": "30",
+    "requirement": "Phase 2",
+    "id": "wires-phase-2"
+  }
+]

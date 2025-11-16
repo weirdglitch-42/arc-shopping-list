@@ -1,0 +1,297 @@
+[
+  {
+    "name": "Advanced Electrical Components",
+    "quantity": "1",
+    "requirement": "Powering Up the Greenhouse",
+    "id": "advanced-electrical-components-powering-up-the-greenhouse"
+  },
+  {
+    "name": "Antiseptic",
+    "quantity": "2",
+    "requirement": "Doctor's Orders",
+    "id": "antiseptic-doctor-s-orders"
+  },
+  {
+    "name": "Apricot",
+    "quantity": "1",
+    "requirement": "Pied Piper",
+    "id": "apricot-pied-piper"
+  },
+  {
+    "name": "Arc Alloy",
+    "quantity": "3",
+    "requirement": "Clearer Skies",
+    "id": "arc-alloy-clearer-skies"
+  },
+  {
+    "name": "Battery",
+    "quantity": "1",
+    "requirement": "Trash Into Treasure, Power Out",
+    "id": "battery-trash-into-treasure--power-out"
+  },
+  {
+    "name": "Burletta I",
+    "quantity": "1",
+    "requirement": "Industrial Espionage",
+    "id": "burletta-i-industrial-espionage"
+  },
+  {
+    "name": "Camera Lens",
+    "quantity": "1",
+    "requirement": "Movie Night",
+    "id": "camera-lens-movie-night"
+  },
+  {
+    "name": "Durable Cloth",
+    "quantity": "1",
+    "requirement": "Doctor's Orders",
+    "id": "durable-cloth-doctor-s-orders"
+  },
+  {
+    "name": "Electrical Components",
+    "quantity": "3",
+    "requirement": "Movie Night",
+    "id": "electrical-components-movie-night"
+  },
+  {
+    "name": "Empty Wine Bottle",
+    "quantity": "1",
+    "requirement": "Pied Piper",
+    "id": "empty-wine-bottle-pied-piper"
+  },
+  {
+    "name": "Faded Photograph",
+    "quantity": "2",
+    "requirement": "Lance's Tea Party",
+    "id": "faded-photograph-lance-s-tea-party"
+  },
+  {
+    "name": "Film Reel",
+    "quantity": "1",
+    "requirement": "Movie Night",
+    "id": "film-reel-movie-night"
+  },
+  {
+    "name": "Fireball Burner",
+    "quantity": "1",
+    "requirement": "What Goes Around",
+    "id": "fireball-burner-what-goes-around"
+  },
+  {
+    "name": "Great Mullein",
+    "quantity": "1",
+    "requirement": "Doctor's Orders",
+    "id": "great-mullein-doctor-s-orders"
+  },
+  {
+    "name": "Hornet Driver",
+    "quantity": "2",
+    "requirement": "The Trifecta, Wasps and Hornets",
+    "id": "hornet-driver-the-trifecta--wasps-and-hornets"
+  },
+  {
+    "name": "Leaper Pulse Unit",
+    "quantity": "1",
+    "requirement": "Into the Fray",
+    "id": "leaper-pulse-unit-into-the-fray"
+  },
+  {
+    "name": "Light Impact Grenade",
+    "quantity": "3",
+    "requirement": "Pied Piper",
+    "id": "light-impact-grenade-pied-piper"
+  },
+  {
+    "name": "Oil",
+    "quantity": "1",
+    "requirement": "Pied Piper",
+    "id": "oil-pied-piper"
+  },
+  {
+    "name": "Power Rod",
+    "quantity": "1",
+    "requirement": "Tribute to Toledo",
+    "id": "power-rod-tribute-to-toledo"
+  },
+  {
+    "name": "Recorder",
+    "quantity": "1",
+    "requirement": "Pied Piper",
+    "id": "recorder-pied-piper"
+  },
+  {
+    "name": "Rocketeer Driver",
+    "quantity": "1",
+    "requirement": "Out of the Shadows",
+    "id": "rocketeer-driver-out-of-the-shadows"
+  },
+  {
+    "name": "Rubber Duck",
+    "quantity": "2",
+    "requirement": "Lance's Tea Party",
+    "id": "rubber-duck-lance-s-tea-party"
+  },
+  {
+    "name": "Sensors",
+    "quantity": "3",
+    "requirement": "Powering Up the Greenhouse",
+    "id": "sensors-powering-up-the-greenhouse"
+  },
+  {
+    "name": "Snitch Scanner",
+    "quantity": "1",
+    "requirement": "The Trifecta",
+    "id": "snitch-scanner-the-trifecta"
+  },
+  {
+    "name": "Surveyor Vault",
+    "quantity": "1",
+    "requirement": "Mixed Signals",
+    "id": "surveyor-vault-mixed-signals"
+  },
+  {
+    "name": "Syringe",
+    "quantity": "1",
+    "requirement": "Doctor's Orders",
+    "id": "syringe-doctor-s-orders"
+  },
+  {
+    "name": "Tick Pod",
+    "quantity": "1",
+    "requirement": "Small But Sinister",
+    "id": "tick-pod-small-but-sinister"
+  },
+  {
+    "name": "Wasp Driver",
+    "quantity": "2",
+    "requirement": "The Trifecta, Wasps and Hornets",
+    "id": "wasp-driver-the-trifecta--wasps-and-hornets"
+  },
+  {
+    "name": "Wires",
+    "quantity": "9",
+    "requirement": "Eyes on the Prize, Trash Into Treasure",
+    "id": "wires-eyes-on-the-prize--trash-into-treasure"
+  },
+
+  {
+    "name": "Armored Patrol Key Card",
+    "quantity": "1",
+    "requirement": "Armored Transport",
+    "id": "armored-patrol-key-card-armored-transport"
+  },
+  {
+    "name": "Battle Plans",
+    "quantity": "1",
+    "requirement": "Echoes of Victory",
+    "id": "battle-plans-echoes-of-victory"
+  },
+  {
+    "name": "Battery Cell",
+    "quantity": "1",
+    "requirement": "Communication Hideout",
+    "id": "battery-cell-communication-hideout"
+  },
+  {
+    "name": "Celeste's Journal 1",
+    "quantity": "1",
+    "requirement": "Celeste's Journals",
+    "id": "celeste-s-journal-1-celeste-s-journals"
+  },
+  {
+    "name": "Celeste's Journal 2",
+    "quantity": "1",
+    "requirement": "Celeste's Journals",
+    "id": "celeste-s-journal-2-celeste-s-journals"
+  },
+  {
+    "name": "Communication Device",
+    "quantity": "1",
+    "requirement": "With a Trace",
+    "id": "communication-device-with-a-trace"
+  },
+  {
+    "name": "Deflated Football",
+    "quantity": "1",
+    "requirement": "The League",
+    "id": "deflated-football-the-league"
+  },
+  {
+    "name": "Duct Tape",
+    "quantity": "1",
+    "requirement": "The League",
+    "id": "duct-tape-the-league"
+  },
+  {
+    "name": "ESR Analyzer",
+    "quantity": "1",
+    "requirement": "A Reveal in Ruins",
+    "id": "esr-analyzer-a-reveal-in-ruins"
+  },
+  {
+    "name": "Flag",
+    "quantity": "1",
+    "requirement": "A Symbol of Unification",
+    "id": "flag-a-symbol-of-unification"
+  },
+  {
+    "name": "Helmet",
+    "quantity": "1",
+    "requirement": "Keeping the Memory",
+    "id": "helmet-keeping-the-memory"
+  },
+  {
+    "name": "LiDAR Scanner",
+    "quantity": "1",
+    "requirement": "A Lay of the Land",
+    "id": "lidar-scanner-a-lay-of-the-land"
+  },
+  {
+    "name": "Major Aiva's Mementos",
+    "quantity": "1",
+    "requirement": "The Major's Footlocker",
+    "id": "major-aiva-s-mementos-the-major-s-footlocker"
+  },
+  {
+    "name": "Possibly Toxic Plant",
+    "quantity": "1",
+    "requirement": "A New Type of Plant",
+    "id": "possibly-toxic-plant-a-new-type-of-plant"
+  },
+  {
+    "name": "Romance Book",
+    "quantity": "1",
+    "requirement": "Building a Library",
+    "id": "romance-book-building-a-library"
+  },
+  {
+    "name": "Detective Book",
+    "quantity": "1",
+    "requirement": "Building a Library",
+    "id": "detective-book-building-a-library"
+  },
+  {
+    "name": "Adventure Book",
+    "quantity": "1",
+    "requirement": "Building a Library",
+    "id": "adventure-book-building-a-library"
+  },
+  {
+    "name": "First Wave Tape",
+    "quantity": "1",
+    "requirement": "Broken Monument",
+    "id": "first-wave-tape-broken-monument"
+  },
+  {
+    "name": "First Wave Compass",
+    "quantity": "1",
+    "requirement": "Broken Monument",
+    "id": "first-wave-compass-broken-monument"
+  },
+  {
+    "name": "First Wave Rations",
+    "quantity": "1",
+    "requirement": "Broken Monument",
+    "id": "first-wave-rations-broken-monument"
+  }
+]

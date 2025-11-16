@@ -1,0 +1,248 @@
+[
+  {
+    "name": "Advanced Electrical Components",
+    "quantity": "5",
+    "requirement": "Utility 3",
+    "id": "advanced-electrical-components-utility-3"
+  },
+  {
+    "name": "Advanced Mechanical Components",
+    "quantity": "10",
+    "requirement": "Gear Bench 3, Gunsmith 3",
+    "id": "advanced-mechanical-components-gear-bench-3--gunsmith-3"
+  },
+  {
+    "name": "Antiseptic",
+    "quantity": "8",
+    "requirement": "Medical Lab 3",
+    "id": "antiseptic-medical-lab-3"
+  },
+  {
+    "name": "ARC Alloy",
+    "quantity": "18",
+    "requirement": "Medical Lab 1, Explosives 1, Utility 1",
+    "id": "arc-alloy-medical-lab-1--explosives-1--utility-1"
+  },
+  {
+    "name": "ARC Circuitry",
+    "quantity": "10",
+    "requirement": "Refiner 3",
+    "id": "arc-circuitry-refiner-3"
+  },
+  {
+    "name": "ARC Motion Core",
+    "quantity": "5",
+    "requirement": "Refiner 2",
+    "id": "arc-motion-core-refiner-2"
+  },
+  {
+    "name": "ARC Powercell",
+    "quantity": "5",
+    "requirement": "Refiner 1",
+    "id": "arc-powercell-refiner-1"
+  },
+  {
+    "name": "Bastion Cell",
+    "quantity": "6",
+    "requirement": "Utility 3",
+    "id": "bastion-cell-utility-3"
+  },
+  {
+    "name": "Bombardier Cell",
+    "quantity": "6",
+    "requirement": "Refiner 3",
+    "id": "bombardier-cell-refiner-3"
+  },
+  {
+    "name": "Chemicals",
+    "quantity": "50",
+    "requirement": "Explosives 1",
+    "id": "chemicals-explosives-1"
+  },
+  {
+    "name": "Cracked Bioscanner",
+    "quantity": "2",
+    "requirement": "Medical Lab 2",
+    "id": "cracked-bioscanner-medical-lab-2"
+  },
+  {
+    "name": "Crude Explosives",
+    "quantity": "5",
+    "requirement": "Explosives 2",
+    "id": "crude-explosives-explosives-2"
+  },
+  {
+    "name": "Damaged Heat Sink",
+    "quantity": "2",
+    "requirement": "Utility 2",
+    "id": "damaged-heat-sink-utility-2"
+  },
+  {
+    "name": "Durable Cloth",
+    "quantity": "5",
+    "requirement": "Medical Lab 2",
+    "id": "durable-cloth-medical-lab-2"
+  },
+  {
+    "name": "Electrical Components",
+    "quantity": "5",
+    "requirement": "Utility 2",
+    "id": "electrical-components-utility-2"
+  },
+  {
+    "name": "Explosive Compound",
+    "quantity": "5",
+    "requirement": "Explosives 3",
+    "id": "explosive-compound-explosives-3"
+  },
+  {
+    "name": "Fabric",
+    "quantity": "55",
+    "requirement": "Medical Lab 1, Utility 1",
+    "id": "fabric-medical-lab-1--utility-1"
+  },
+  {
+    "name": "Fireball Burner",
+    "quantity": "8",
+    "requirement": "Refiner 2",
+    "id": "fireball-burner-refiner-2"
+  },
+  {
+    "name": "Fried Motherboard",
+    "quantity": "3",
+    "requirement": "Utility 3",
+    "id": "fried-motherboard-utility-3"
+  },
+  {
+    "name": "Hornet Driver",
+    "quantity": "5",
+    "requirement": "Utility 2",
+    "id": "hornet-driver-utility-2"
+  },
+  {
+    "name": "Industrial Battery",
+    "quantity": "3",
+    "requirement": "Utility 3",
+    "id": "industrial-battery-utility-3"
+  },
+  {
+    "name": "Laboratory Reagents",
+    "quantity": "3",
+    "requirement": "Explosives 3",
+    "id": "laboratory-reagents-explosives-3"
+  },
+  {
+    "name": "Leaper Pulse Unit",
+    "quantity": "4",
+    "requirement": "Utility 3",
+    "id": "leaper-pulse-unit-utility-3"
+  },
+  {
+    "name": "Mechanical Components",
+    "quantity": "10",
+    "requirement": "Gear Bench 2, Gunsmith 2",
+    "id": "mechanical-components-gear-bench-2--gunsmith-2"
+  },
+  {
+    "name": "Metal Parts",
+    "quantity": "100",
+    "requirement": "Gear Bench 1, Gunsmith 1, Refiner 1",
+    "id": "metal-parts-gear-bench-1--gunsmith-1--refiner-1"
+  },
+  {
+    "name": "Motor",
+    "quantity": "3",
+    "requirement": "Refiner 3",
+    "id": "motor-refiner-3"
+  },
+  {
+    "name": "Plastic Parts",
+    "quantity": "25",
+    "requirement": "Utility 1",
+    "id": "plastic-parts-utility-1"
+  },
+  {
+    "name": "Pop Trigger",
+    "quantity": "5",
+    "requirement": "Explosives 2",
+    "id": "pop-trigger-explosives-2"
+  },
+  {
+    "name": "Power Cable",
+    "quantity": "3",
+    "requirement": "Utility 2",
+    "id": "power-cable-utility-2"
+  },
+  {
+    "name": "Rocketeer Driver",
+    "quantity": "3",
+    "requirement": "Explosives 3",
+    "id": "rocketeer-driver-explosives-3"
+  },
+  {
+    "name": "Rubber Parts",
+    "quantity": "60",
+    "requirement": "Gear Bench 1, Gunsmith 1",
+    "id": "rubber-parts-gear-bench-1--gunsmith-1"
+  },
+  {
+    "name": "Rusted Gear",
+    "quantity": "6",
+    "requirement": "Gear Bench 3, Gunsmith 3",
+    "id": "rusted-gear-gear-bench-3--gunsmith-3"
+  },
+  {
+    "name": "Rusted Shut Medical Kit",
+    "quantity": "3",
+    "requirement": "Medical Lab 3",
+    "id": "rusted-shut-medical-kit-medical-lab-3"
+  },
+  {
+    "name": "Rusted Tools",
+    "quantity": "6",
+    "requirement": "Gear Bench 2, Gunsmith 2",
+    "id": "rusted-tools-gear-bench-2--gunsmith-2"
+  },
+  {
+    "name": "Sentinel Firing Core",
+    "quantity": "8",
+    "requirement": "Gear Bench 3, Gunsmith 3",
+    "id": "sentinel-firing-core-gear-bench-3--gunsmith-3"
+  },
+  {
+    "name": "Snitch Scanner",
+    "quantity": "6",
+    "requirement": "Utility 2",
+    "id": "snitch-scanner-utility-2"
+  },
+  {
+    "name": "Surveyor Vault",
+    "quantity": "5",
+    "requirement": "Medical Lab 3",
+    "id": "surveyor-vault-medical-lab-3"
+  },
+  {
+    "name": "Synthesized Fuel",
+    "quantity": "3",
+    "requirement": "Explosives 2",
+    "id": "synthesized-fuel-explosives-2"
+  },
+  {
+    "name": "Tick Pod",
+    "quantity": "8",
+    "requirement": "Medical Lab 2",
+    "id": "tick-pod-medical-lab-2"
+  },
+  {
+    "name": "Toaster",
+    "quantity": "3",
+    "requirement": "Refiner 2",
+    "id": "toaster-refiner-2"
+  },
+  {
+    "name": "Wasp Driver",
+    "quantity": "16",
+    "requirement": "Gear Bench 2, Gunsmith 2",
+    "id": "wasp-driver-gear-bench-2--gunsmith-2"
+  }
+]

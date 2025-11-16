@@ -1,0 +1,50 @@
+[
+  {
+    "name": "Apricot",
+    "quantity": "15",
+    "requirement": "Level three, level five",
+    "id": "apricot-level-three--level-five"
+  },
+  {
+    "name": "Cat Bed",
+    "quantity": "1",
+    "requirement": "Level four",
+    "id": "cat-bed-level-four"
+  },
+  {
+    "name": "Dog Collar",
+    "quantity": "1",
+    "requirement": "Level two",
+    "id": "dog-collar-level-two"
+  },
+  {
+    "name": "Lemon",
+    "quantity": "3",
+    "requirement": "Level three",
+    "id": "lemon-level-three"
+  },
+  {
+    "name": "Mushroom",
+    "quantity": "12",
+    "requirement": "Level five",
+    "id": "mushroom-level-five"
+  },
+  {
+    "name": "Olives",
+    "quantity": "6",
+    "requirement": "Level four",
+    "id": "olives-level-four"
+  },
+  {
+    "name": "Prickly Pear",
+    "quantity": "6",
+    "requirement": "Level four",
+    "id": "prickly-pear-level-four"
+  },
+  {
+    "name": "Very Comfortable Pillow",
+    "quantity": "3",
+    "requirement": "Level five",
+    "id": "very-comfortable-pillow-level-five"
+  }
+]
