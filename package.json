@@ -53,7 +53,7 @@
     },
     "mac": {
       "target": "dmg",
-      "icon": "arc-raiders-icon-256.png"
+      "icon": "arc-raiders-icon-512.png"
     },
     "linux": {
       "target": "AppImage",
