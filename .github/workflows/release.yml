@@ -28,6 +28,18 @@ jobs:
     - name: Build application
       run: npm run build
 
+    - name: Build for Windows
+      if: matrix.os == 'windows-latest'
+      run: npm run build:win
+
+    - name: Build for macOS
+      if: matrix.os == 'macos-latest'
+      run: npm run build:mac
+
+    - name: Build for Linux
+      if: matrix.os == 'ubuntu-latest'
+      run: npm run build:linux
+
     - name: Upload build artifacts
       uses: actions/upload-artifact@v4
       with:
@@ -58,15 +70,9 @@ jobs:
       uses: softprops/action-gh-release@v1
       with:
         files: |
-          artifacts/arc-shopping-list-windows-latest/*.exe
-          artifacts/arc-shopping-list-windows-latest/*.exe.blockmap
           artifacts/arc-shopping-list-windows-latest/*.zip
           artifacts/arc-shopping-list-macos-latest/*.dmg
           artifacts/arc-shopping-list-ubuntu-latest/*.AppImage
-          artifacts/arc-shopping-list-ubuntu-latest/*.deb
-          artifacts/arc-shopping-list-ubuntu-latest/*.rpm
-          artifacts/arc-shopping-list-ubuntu-latest/*.snap
-          artifacts/arc-shopping-list-ubuntu-latest/*.tar.gz
         generate_release_notes: true
         draft: false
         prerelease: false
