@@ -81,24 +81,40 @@ function runLocalBuild() {
     // Verify build - get current version from package.json
     const packageJson = JSON.parse(fs.readFileSync('package.json', 'utf8'));
     const currentVersion = packageJson.version;
+    const exePath = `release/ARC Raiders Item Tracker Setup ${currentVersion}.exe`;
     const zipPath = `release/ARC Raiders Item Tracker-${currentVersion}-win.zip`;
-    if (!fs.existsSync(zipPath)) {
-      throw new Error(`Build failed - ${zipPath} not found`);
+
+    // Check for either EXE installer or ZIP file
+    let foundPackage = false;
+    let packagePath = '';
+    let packageName = '';
+
+    if (fs.existsSync(exePath)) {
+      packagePath = exePath;
+      packageName = `arc-shopping-list-v${currentVersion}-windows-installer.exe`;
+      foundPackage = true;
+    } else if (fs.existsSync(zipPath)) {
+      packagePath = zipPath;
+      packageName = `arc-shopping-list-v${currentVersion}-windows.zip`;
+      foundPackage = true;
     }
 
-    // Copy the build zip to the expected location
-    const version = currentVersion;
-    const finalZipName = `arc-shopping-list-v${version}-windows.zip`;
+    if (!foundPackage) {
+      throw new Error(`Build failed - neither ${exePath} nor ${zipPath} found`);
+    }
 
-    // Clean up old zips
-    const oldZips = fs.readdirSync('.').filter(file => file.startsWith('arc-shopping-list-v') && file.endsWith('.zip'));
-    oldZips.forEach(zip => fs.unlinkSync(zip));
+    // Clean up old packages
+    const oldPackages = fs.readdirSync('.').filter(file =>
+      file.startsWith('arc-shopping-list-v') &&
+      (file.endsWith('.exe') || file.endsWith('.zip'))
+    );
+    oldPackages.forEach(file => fs.unlinkSync(file));
 
-    // Copy the build zip to the root directory with the expected name
-    fs.copyFileSync(zipPath, finalZipName);
+    // Copy the build package to the root directory
+    fs.copyFileSync(packagePath, packageName);
 
-    const stats = fs.statSync(finalZipName);
-    console.log(`✅ Local package created: ${finalZipName} (${(stats.size / 1024 / 1024).toFixed(1)}MB)`);
+    const stats = fs.statSync(packageName);
+    console.log(`✅ Local package created: ${packageName} (${(stats.size / 1024 / 1024).toFixed(1)}MB)`);
 
   } catch (error) {
     console.error('❌ Local build failed:', error.message);
