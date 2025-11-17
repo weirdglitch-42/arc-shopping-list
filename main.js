@@ -1,6 +1,5 @@
 const { app, BrowserWindow, Menu, dialog } = require('electron');
 const path = require('path');
-const { autoUpdater } = require('electron-updater');
 
 let mainWindow;
 
@@ -11,7 +10,7 @@ function createWindow() {
     height: 800,
     minWidth: 800,
     minHeight: 600,
-    icon: 'arc-raiders-icon-512.png',
+    icon: 'arc-raiders-icon-256.png',
     webPreferences: {
       nodeIntegration: false,
       contextIsolation: true,
@@ -61,58 +60,7 @@ app.whenReady().then(() => {
     }
   });
 
-  // Auto-updater configuration
-  if (process.env.NODE_ENV !== 'development') {
-    // Check for updates on startup
-    autoUpdater.checkForUpdatesAndNotify();
 
-    // Auto-updater event handlers
-    autoUpdater.on('checking-for-update', () => {
-      console.log('Checking for update...');
-    });
-
-    autoUpdater.on('update-available', (info) => {
-      console.log('Update available:', info.version);
-      dialog.showMessageBox(mainWindow, {
-        type: 'info',
-        title: 'Update Available',
-        message: `A new version (${info.version}) is available!`,
-        detail: 'The update will be downloaded in the background and installed when you restart the application.'
-      });
-    });
-
-    autoUpdater.on('update-not-available', (info) => {
-      console.log('Update not available:', info.version);
-    });
-
-    autoUpdater.on('error', (err) => {
-      console.error('Update error:', err);
-    });
-
-    autoUpdater.on('download-progress', (progressObj) => {
-      let log_message = "Download speed: " + progressObj.bytesPerSecond;
-      log_message = log_message + ' - Downloaded ' + progressObj.percent + '%';
-      log_message = log_message + ' (' + progressObj.transferred + "/" + progressObj.total + ')';
-      console.log(log_message);
-    });
-
-    autoUpdater.on('update-downloaded', (info) => {
-      console.log('Update downloaded:', info.version);
-      dialog.showMessageBox(mainWindow, {
-        type: 'info',
-        title: 'Update Ready',
-        message: 'Update Downloaded',
-        detail: `Version ${info.version} has been downloaded. The application will restart to install the update.`,
-        buttons: ['Restart Now', 'Later'],
-        defaultId: 0,
-        cancelId: 1
-      }).then(result => {
-        if (result.response === 0) {
-          autoUpdater.quitAndInstall();
-        }
-      });
-    });
-  }
 });
 
 // Quit when all windows are closed, except on macOS
@@ -120,6 +68,14 @@ app.on('window-all-closed', () => {
   if (process.platform !== 'darwin') {
     app.quit();
   }
+});
+
+// Ensure clean exit
+app.on('before-quit', () => {
+  // Force exit if needed
+  setTimeout(() => {
+    app.exit(0);
+  }, 1000);
 });
 
 // Security: Prevent new window creation
@@ -179,46 +135,6 @@ const template = [
   {
     label: 'Help',
     submenu: [
-      {
-        label: 'Check for Updates',
-        click: () => {
-          if (process.env.NODE_ENV === 'development') {
-            dialog.showMessageBox(mainWindow, {
-              type: 'info',
-              title: 'Development Mode',
-              message: 'Updates are disabled in development mode.'
-            });
-            return;
-          }
-
-          autoUpdater.checkForUpdates()
-            .then(result => {
-              if (result.updateInfo.version !== app.getVersion()) {
-                dialog.showMessageBox(mainWindow, {
-                  type: 'info',
-                  title: 'Update Available',
-                  message: `A new version (${result.updateInfo.version}) is available!`,
-                  detail: 'The update will be downloaded in the background.'
-                });
-              } else {
-                dialog.showMessageBox(mainWindow, {
-                  type: 'info',
-                  title: 'Up to Date',
-                  message: 'You are running the latest version.'
-                });
-              }
-            })
-            .catch(err => {
-              console.error('Update check failed:', err);
-              dialog.showMessageBox(mainWindow, {
-                type: 'error',
-                title: 'Update Check Failed',
-                message: 'Failed to check for updates. Please try again later.'
-              });
-            });
-        }
-      },
-      { type: 'separator' },
       {
         label: 'About ARC Raiders Item Tracker',
         click: () => {

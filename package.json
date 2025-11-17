@@ -28,7 +28,7 @@
     "productName": "ARC Raiders Item Tracker",
     "publish": null,
     "directories": {
-      "output": "dist"
+      "output": "release"
     },
     "files": [
       "**/*",
@@ -43,30 +43,22 @@
     "win": {
       "target": [
         {
-          "target": "nsis",
-          "arch": [
-            "x64"
-          ]
-        },
-        {
           "target": "zip",
           "arch": [
             "x64"
           ]
         }
       ],
-      "icon": "arc-raiders-icon-512.png"
+      "icon": "arc-raiders-icon-256.png"
     },
     "mac": {
       "target": "dmg",
-      "icon": "arc-raiders-icon-512.png"
+      "icon": "arc-raiders-icon-256.png"
     },
     "linux": {
       "target": "AppImage",
-      "icon": "arc-raiders-icon-512.png"
+      "icon": "arc-raiders-icon-256.png"
     }
   },
-  "dependencies": {
-    "electron-updater": "^6.6.2"
-  }
+  "dependencies": {}
 }

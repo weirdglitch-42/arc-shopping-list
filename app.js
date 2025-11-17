@@ -53,8 +53,7 @@ class ArcShoppingList {
         // Initialize theme system
         this.initializeTheme();
 
-        // Initialize update status system
-        this.initializeUpdateStatus();
+
 
         this.init();
     }
@@ -570,13 +569,22 @@ class ArcShoppingList {
             return;
         }
 
+        // Create search input for this tab
+        const tabName = this.getTabNameFromProject(projectName);
+        const searchContainer = document.createElement('div');
+        searchContainer.className = 'search-container';
+        searchContainer.innerHTML = `
+            <input type="text" id="${tabName}-search" placeholder="Search items in ${projectName}..." class="search-input">
+        `;
+
+        container.appendChild(searchContainer);
+
         const groupedItems = this.groupItemsByRequirement(items);
         const completed = this.getCompletedCount(projectName, items);
         const total = items.length;
         const percentage = total > 0 ? Math.round((completed / total) * 100) : 0;
 
         // Update progress bar and text
-        const tabName = this.getTabNameFromProject(projectName);
         const progressFill = document.getElementById(`${tabName}-progress-fill`);
         const progressText = document.getElementById(`${tabName}-progress-text`);
 
@@ -632,6 +640,12 @@ class ArcShoppingList {
             `;
             container.appendChild(attributionDiv);
         }
+
+        // Add search functionality
+        const searchInput = document.getElementById(`${tabName}-search`);
+        searchInput.addEventListener('input', (e) => {
+            this.filterProjectItems(tabName, e.target.value);
+        });
     }
 
     createPhaseGroup(groupName, items, projectName) {
@@ -808,6 +822,27 @@ class ArcShoppingList {
             const itemName = row.dataset.itemName;
             const projects = row.dataset.projects.toLowerCase();
             const matches = !term || itemName.includes(term) || projects.includes(term);
+
+            row.style.display = matches ? 'table-row' : 'none';
+        });
+    }
+
+    filterProjectItems(tabName, searchTerm) {
+        const container = document.getElementById(`${tabName}-container`);
+        const rows = container.querySelectorAll('.item-table-row');
+        const term = searchTerm.toLowerCase().trim();
+
+        rows.forEach(row => {
+            const itemName = row.cells[2]?.textContent.toLowerCase() || ''; // Item Name column
+            const requirement = row.cells[5]?.textContent.toLowerCase() || ''; // Requirement column
+            const itemType = row.cells[6]?.textContent.toLowerCase() || ''; // Type column
+            const description = row.cells[9]?.textContent.toLowerCase() || ''; // Description column
+
+            const matches = !term ||
+                itemName.includes(term) ||
+                requirement.includes(term) ||
+                itemType.includes(term) ||
+                description.includes(term);
 
             row.style.display = matches ? 'table-row' : 'none';
         });
@@ -1135,55 +1170,7 @@ class ArcShoppingList {
         }
     }
 
-    /**
-     * Initialize update status system
-     */
-    initializeUpdateStatus() {
-        // Set up update status button
-        const updateStatus = document.getElementById('update-status');
-        if (updateStatus) {
-            updateStatus.addEventListener('click', () => {
-                this.checkForUpdatesManually();
-            });
-        }
-    }
 
-    /**
-     * Show update available notification
-     */
-    showUpdateAvailable(version) {
-        const updateStatus = document.getElementById('update-status');
-        const updateText = updateStatus?.querySelector('.update-text');
-
-        if (updateStatus && updateText) {
-            updateText.textContent = `Update to v${version} available`;
-            updateStatus.style.display = 'flex';
-        }
-    }
-
-    /**
-     * Hide update notification
-     */
-    hideUpdateAvailable() {
-        const updateStatus = document.getElementById('update-status');
-        if (updateStatus) {
-            updateStatus.style.display = 'none';
-        }
-    }
-
-    /**
-     * Manually check for updates
-     */
-    checkForUpdatesManually() {
-        // This function will be called from the renderer process
-        // The actual update checking is handled in the main process
-        if (window.electronAPI && window.electronAPI.checkForUpdates) {
-            window.electronAPI.checkForUpdates();
-        } else {
-            // Fallback for when electronAPI is not available (development)
-            alert('Update checking is only available in the desktop application.');
-        }
-    }
 
     /**
      * Toggle between light and dark themes
