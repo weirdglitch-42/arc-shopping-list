@@ -81,24 +81,24 @@ function runLocalBuild() {
     // Verify build - get current version from package.json
     const packageJson = JSON.parse(fs.readFileSync('package.json', 'utf8'));
     const currentVersion = packageJson.version;
-    const zipPath = `release/ARC Raiders Item Tracker-${currentVersion}-win.zip`;
-    if (!fs.existsSync(zipPath)) {
-      throw new Error(`Build failed - ${zipPath} not found`);
+    const exePath = `release/ARC Raiders Item Tracker ${currentVersion}.exe`;
+    if (!fs.existsSync(exePath)) {
+      throw new Error(`Build failed - ${exePath} not found`);
     }
 
-    // Copy the build zip to the expected location
+    // Copy the build exe to the expected location
     const version = currentVersion;
-    const finalZipName = `arc-shopping-list-v${version}-windows.zip`;
+    const finalExeName = `arc-shopping-list-v${version}-windows.exe`;
 
-    // Clean up old zips
-    const oldZips = fs.readdirSync('.').filter(file => file.startsWith('arc-shopping-list-v') && file.endsWith('.zip'));
-    oldZips.forEach(zip => fs.unlinkSync(zip));
+    // Clean up old exes
+    const oldExes = fs.readdirSync('.').filter(file => file.startsWith('arc-shopping-list-v') && file.endsWith('.exe'));
+    oldExes.forEach(exe => fs.unlinkSync(exe));
 
-    // Copy the build zip to the root directory with the expected name
-    fs.copyFileSync(zipPath, finalZipName);
+    // Copy the build exe to the root directory with the expected name
+    fs.copyFileSync(exePath, finalExeName);
 
-    const stats = fs.statSync(finalZipName);
-    console.log(`✅ Local package created: ${finalZipName} (${(stats.size / 1024 / 1024).toFixed(1)}MB)`);
+    const stats = fs.statSync(finalExeName);
+    console.log(`✅ Local package created: ${finalExeName} (${(stats.size / 1024 / 1024).toFixed(1)}MB)`);
 
   } catch (error) {
     console.error('❌ Local build failed:', error.message);
