@@ -10,10 +10,11 @@ class ArcShoppingList {
      * Initialize the shopping list application
      */
     constructor() {
-        // Configuration constants
-        this.config = {
+        // Load configuration
+        this.config = window.appConfig || {
             itemsPerPage: 20,
-            paginationOptions: [10, 20, 50]
+            paginationOptions: [10, 20, 50],
+            loadingMessage: 'Loading ARC Raiders Item Tracker...'
         };
 
         this.projects = {};
@@ -78,11 +79,59 @@ class ArcShoppingList {
     }
 
     showLoading() {
-        // Don't destroy the DOM structure - just show a subtle loading state
+        // Show loading overlay with spinner and message
+        const loadingOverlay = document.createElement('div');
+        loadingOverlay.id = 'loading-overlay';
+        loadingOverlay.innerHTML = `
+            <div class="loading-spinner"></div>
+            <p>${this.config.loadingMessage}</p>
+        `;
+        loadingOverlay.style.cssText = `
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.8);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            z-index: 9999;
+            color: white;
+            font-family: 'Barlow', sans-serif;
+        `;
+
+        const spinner = loadingOverlay.querySelector('.loading-spinner');
+        spinner.style.cssText = `
+            width: 50px;
+            height: 50px;
+            border: 4px solid rgba(255, 255, 255, 0.3);
+            border-top: 4px solid #0093ed;
+            border-radius: 50%;
+            animation: spin 1s linear infinite;
+            margin-bottom: 20px;
+        `;
+
+        // Add spinner animation
+        const style = document.createElement('style');
+        style.textContent = `
+            @keyframes spin {
+                0% { transform: rotate(0deg); }
+                100% { transform: rotate(360deg); }
+            }
+        `;
+        document.head.appendChild(style);
+
+        document.body.appendChild(loadingOverlay);
     }
 
     hideLoading() {
-        // Loading is complete
+        // Remove loading overlay
+        const loadingOverlay = document.getElementById('loading-overlay');
+        if (loadingOverlay) {
+            loadingOverlay.remove();
+        }
     }
 
     showError(message) {
@@ -157,7 +206,7 @@ class ArcShoppingList {
                 }
 
                 // Parse quantity (handle non-numeric values)
-                const quantity = parseInt(item.quantity) || 1;
+                const quantity = parseInt(item.quantity, 10) || 1;
                 this.itemTotals[item.id].totalNeeded += quantity;
                 this.itemTotals[item.id].instances.push({
                     projectName,
@@ -479,6 +528,12 @@ class ArcShoppingList {
         const container = document.getElementById('all-items-container');
         const allItems = this.getAllItemsRemaining();
 
+        // Clean up existing event listeners
+        const existingSearchInput = document.getElementById('all-items-search');
+        if (existingSearchInput && existingSearchInput._searchHandler) {
+            existingSearchInput.removeEventListener('input', existingSearchInput._searchHandler);
+        }
+
         container.innerHTML = '';
 
         // Create search input
@@ -545,11 +600,13 @@ class ArcShoppingList {
         container.appendChild(searchContainer);
         container.appendChild(tableContainer);
 
-        // Add search functionality
+        // Add search functionality with stored handler reference
         const searchInput = document.getElementById('all-items-search');
-        searchInput.addEventListener('input', (e) => {
+        const searchHandler = (e) => {
             this.filterAllItems(e.target.value);
-        });
+        };
+        searchInput.addEventListener('input', searchHandler);
+        searchInput._searchHandler = searchHandler; // Store reference for cleanup
 
         this.updateAllItemsProgress();
     }
@@ -557,6 +614,13 @@ class ArcShoppingList {
     renderSingleProject(projectName, containerId) {
         const container = document.getElementById(containerId);
         const items = this.projects[projectName];
+
+        // Clean up existing event listeners
+        const tabName = this.getTabNameFromProject(projectName);
+        const existingSearchInput = document.getElementById(`${tabName}-search`);
+        if (existingSearchInput && existingSearchInput._searchHandler) {
+            existingSearchInput.removeEventListener('input', existingSearchInput._searchHandler);
+        }
 
         // Clear the container first
         container.innerHTML = '';
@@ -570,7 +634,6 @@ class ArcShoppingList {
         }
 
         // Create search input for this tab
-        const tabName = this.getTabNameFromProject(projectName);
         const searchContainer = document.createElement('div');
         searchContainer.className = 'search-container';
         searchContainer.innerHTML = `
@@ -641,11 +704,13 @@ class ArcShoppingList {
             container.appendChild(attributionDiv);
         }
 
-        // Add search functionality
+        // Add search functionality with stored handler reference
         const searchInput = document.getElementById(`${tabName}-search`);
-        searchInput.addEventListener('input', (e) => {
+        const searchHandler = (e) => {
             this.filterProjectItems(tabName, e.target.value);
-        });
+        };
+        searchInput.addEventListener('input', searchHandler);
+        searchInput._searchHandler = searchHandler; // Store reference for cleanup
     }
 
     createPhaseGroup(groupName, items, projectName) {
@@ -766,7 +831,7 @@ class ArcShoppingList {
                     return;
                 }
 
-                const quantity = parseInt(item.quantity) || 1;
+                const quantity = parseInt(item.quantity, 10) || 1;
 
                 if (!remainingItems[itemName]) {
                     remainingItems[itemName] = {
@@ -814,9 +879,10 @@ class ArcShoppingList {
     }
 
     filterAllItems(searchTerm) {
+        const validatedTerm = this.validateSearchTerm(searchTerm);
         const tableContainer = document.querySelector('.all-items-table-container');
         const rows = tableContainer.querySelectorAll('.all-items-entry');
-        const term = searchTerm.toLowerCase().trim();
+        const term = validatedTerm.toLowerCase();
 
         rows.forEach(row => {
             const itemName = row.dataset.itemName;
@@ -828,9 +894,10 @@ class ArcShoppingList {
     }
 
     filterProjectItems(tabName, searchTerm) {
+        const validatedTerm = this.validateSearchTerm(searchTerm);
         const container = document.getElementById(`${tabName}-container`);
         const rows = container.querySelectorAll('.item-table-row');
-        const term = searchTerm.toLowerCase().trim();
+        const term = validatedTerm.toLowerCase();
 
         rows.forEach(row => {
             const itemName = row.cells[2]?.textContent.toLowerCase() || ''; // Item Name column
@@ -1127,9 +1194,47 @@ class ArcShoppingList {
     }
 
     changeItemsPerPage(newSize) {
-        this.itemsPerPage = parseInt(newSize);
-        this.currentPage = 1; // Reset to first page
-        this.renderWikiTab();
+        const validatedSize = this.validateItemsPerPage(newSize);
+        if (validatedSize !== null) {
+            this.itemsPerPage = validatedSize;
+            this.currentPage = 1; // Reset to first page
+            this.renderWikiTab();
+        } else {
+            // Reset the select element to the current valid value
+            const selectElement = document.getElementById('items-per-page');
+            if (selectElement) {
+                selectElement.value = this.itemsPerPage;
+            }
+        }
+    }
+
+    /**
+     * Validate items per page input
+     * @param {string|number} value - The value to validate
+     * @returns {number|null} - Validated number or null if invalid
+     */
+    validateItemsPerPage(value) {
+        const num = parseInt(value, 10);
+        if (isNaN(num) || num < 1 || num > this.config.maxItemsPerPage) {
+            console.warn(`Invalid items per page: ${value}. Must be between 1 and ${this.config.maxItemsPerPage}`);
+            return null;
+        }
+        return num;
+    }
+
+    /**
+     * Validate search input
+     * @param {string} value - The search term to validate
+     * @returns {string} - Sanitized search term
+     */
+    validateSearchTerm(value) {
+        if (typeof value !== 'string') return '';
+        const trimmed = value.trim();
+        if (trimmed.length > this.config.maxSearchLength) {
+            console.warn(`Search term too long: ${trimmed.length} characters. Max allowed: ${this.config.maxSearchLength}`);
+            return trimmed.substring(0, this.config.maxSearchLength);
+        }
+        return trimmed;
     }
 
     changePage(newPage) {
