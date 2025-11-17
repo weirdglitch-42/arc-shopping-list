@@ -1,27 +1,41 @@
 {
   "name": "arc-shopping-list",
-  "version": "1.2.2",
+  "version": "1.2.3",
   "description": "ARC Raiders Item Tracker - Desktop App",
   "main": "main.js",
   "scripts": {
-    "start": "electron .",
-    "dev": "electron . --dev",
-    "build": "electron-builder",
-    "build:win": "electron-builder --win",
-    "build:mac": "electron-builder --mac",
-    "build:linux": "electron-builder --linux",
+    "start": "npm run build && electron .",
+    "dev": "npm run build:ts:watch",
+    "dev:electron": "npm run build && electron . --dev",
+    "build": "npm run build:ts && npm run build:copy-js",
+    "build:copy-js": "copyfiles -f *.js dist/",
+    "build:ts": "tsc",
+    "build:ts:watch": "tsc --watch",
+    "build:prod": "npm run build:ts:prod",
+    "build:ts:prod": "tsc --sourceMap false --removeComments true",
+    "build:win": "npm run build:prod && electron-builder --win",
+    "build:mac": "npm run build:prod && electron-builder --mac",
+    "build:linux": "npm run build:prod && electron-builder --linux",
+    "build:all": "npm run build:prod && electron-builder --win --mac --linux",
     "release": "node scripts/create-release.js",
     "push-release": "node scripts/push-release.js",
     "bump": "node scripts/bump-version.js",
     "bump:patch": "node scripts/bump-version.js patch",
     "bump:minor": "node scripts/bump-version.js minor",
-    "bump:major": "node scripts/bump-version.js major"
+    "bump:major": "node scripts/bump-version.js major",
+    "type-check": "tsc --noEmit",
+    "clean": "rimraf dist release",
+    "clean:dist": "rimraf dist"
   },
   "author": "ARC Raiders Community",
   "license": "MIT",
   "devDependencies": {
+    "@types/node": "^24.10.1",
+    "copyfiles": "^2.4.1",
     "electron": "^28.0.0",
-    "electron-builder": "^24.0.0"
+    "electron-builder": "^24.0.0",
+    "rimraf": "^6.1.0",
+    "typescript": "^5.9.3"
   },
   "build": {
     "appId": "com.arcraiders.itemtracker",
@@ -32,13 +46,15 @@
     },
     "files": [
       "**/*",
-      "!dist/**",
       "!build/**",
       "!node_modules/**",
       "!*.md",
       "!memory-bank/**",
       "!services/**",
-      "!icons/**"
+      "!icons/**",
+      "!*.ts",
+      "!tsconfig.json",
+      "!types.d.ts"
     ],
     "win": {
       "target": [
@@ -65,6 +81,5 @@
       "target": "AppImage",
       "icon": "arc-raiders-icon-512.png"
     }
-  },
-  "dependencies": {}
+  }
 }
