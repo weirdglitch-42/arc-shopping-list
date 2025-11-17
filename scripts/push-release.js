@@ -67,9 +67,9 @@ function runLocalBuild() {
   try {
     console.log('🔨 Running local build and packaging...');
 
-    // Clean and build
-    if (fs.existsSync('dist')) {
-      fs.rmSync('dist', { recursive: true, force: true });
+    // Clean release directory
+    if (fs.existsSync('release')) {
+      fs.rmSync('release', { recursive: true, force: true });
     }
 
     try {
@@ -81,36 +81,24 @@ function runLocalBuild() {
     // Verify build - get current version from package.json
     const packageJson = JSON.parse(fs.readFileSync('package.json', 'utf8'));
     const currentVersion = packageJson.version;
-    const exePath = `dist/ARC Raiders Item Tracker Setup ${currentVersion}.exe`;
-    if (!fs.existsSync(exePath)) {
-      throw new Error(`Build failed - ${exePath} not found`);
+    const zipPath = `release/ARC Raiders Item Tracker-${currentVersion}-win.zip`;
+    if (!fs.existsSync(zipPath)) {
+      throw new Error(`Build failed - ${zipPath} not found`);
     }
 
-    // Create local zip
+    // Copy the build zip to the expected location
     const version = currentVersion;
-    const zipName = `arc-shopping-list-v${version}-windows.zip`;
+    const finalZipName = `arc-shopping-list-v${version}-windows.zip`;
 
     // Clean up old zips
     const oldZips = fs.readdirSync('.').filter(file => file.startsWith('arc-shopping-list-v') && file.endsWith('.zip'));
     oldZips.forEach(zip => fs.unlinkSync(zip));
 
-    // Create new zip
-    const tempDir = 'temp_release';
-    if (fs.existsSync(tempDir)) {
-      fs.rmSync(tempDir, { recursive: true, force: true });
-    }
-    fs.mkdirSync(tempDir);
+    // Copy the build zip to the root directory with the expected name
+    fs.copyFileSync(zipPath, finalZipName);
 
-    fs.copyFileSync(exePath, `${tempDir}/installer.exe`);
-    fs.copyFileSync('README.md', `${tempDir}/README.md`);
-
-    const psCommand = `Compress-Archive -Path "${tempDir}/*" -DestinationPath "${zipName}" -Force`;
-    execSync(`powershell "${psCommand}"`, { stdio: 'inherit' });
-
-    fs.rmSync(tempDir, { recursive: true, force: true });
-
-    const stats = fs.statSync(zipName);
-    console.log(`✅ Local package created: ${zipName} (${(stats.size / 1024 / 1024).toFixed(1)}MB)`);
+    const stats = fs.statSync(finalZipName);
+    console.log(`✅ Local package created: ${finalZipName} (${(stats.size / 1024 / 1024).toFixed(1)}MB)`);
 
   } catch (error) {
     console.error('❌ Local build failed:', error.message);
