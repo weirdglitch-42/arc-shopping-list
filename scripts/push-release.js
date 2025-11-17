@@ -73,7 +73,7 @@ function runLocalBuild() {
     }
 
     try {
-      execSync('npm run build', { stdio: 'inherit' });
+      execSync('npm run build:win', { stdio: 'inherit' });
     } catch (buildError) {
       console.log('⚠️ Build completed with warnings/errors, checking for output files...');
     }
